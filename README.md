@@ -12,7 +12,7 @@
 
 ## Сайт
 
-Сайт размещен по [ссылке](https://k1rixmp3.github.io/trading-framework-practice/site/index.html)
+Сайт размещен по [ссылке](https://k1rixmp3.github.io/trading-framework-practice/site/index.html).
 
 ## Вариативная часть задания
 
