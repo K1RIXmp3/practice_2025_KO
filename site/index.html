@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фреймворк для алгоритмической торговли на финансовых рынках</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#1a237e',secondary:'#f5f5f5'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Roboto', sans-serif;
+}
+.chart-container {
+width: 100%;
+height: 300px;
+}
+input:focus, button:focus {
+outline: none;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Навигационная панель -->
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+<nav class="container mx-auto px-4 py-4">
+<div class="flex justify-between items-center">
+<div class="text-xl font-medium text-primary">Алготрейдинг</div>
+<div class="hidden md:flex space-x-8">
+<a href="#home" class="text-gray-700 hover:text-primary transition-colors">Главная</a>
+<a href="#about" class="text-gray-700 hover:text-primary transition-colors">О проекте</a>
+<a href="#team" class="text-gray-700 hover:text-primary transition-colors">Команда</a>
+<a href="#journal" class="text-gray-700 hover:text-primary transition-colors">Журнал</a>
+<a href="#reports" class="text-gray-700 hover:text-primary transition-colors">Отчеты</a>
+<a href="#resources" class="text-gray-700 hover:text-primary transition-colors">Ресурсы</a>
+</div>
+<div class="md:hidden w-8 h-8 flex items-center justify-center cursor-pointer" id="mobile-menu-button">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</div>
+<!-- Мобильное меню -->
+<div class="md:hidden hidden transition-all duration-300 ease-in-out" id="mobile-menu">
+<div class="flex flex-col space-y-4 mt-4 pb-4">
+<a href="#home" class="text-gray-700 hover:text-primary transition-colors">Главная</a>
+<a href="#about" class="text-gray-700 hover:text-primary transition-colors">О проекте</a>
+<a href="#team" class="text-gray-700 hover:text-primary transition-colors">Команда</a>
+<a href="#journal" class="text-gray-700 hover:text-primary transition-colors">Журнал</a>
+<a href="#reports" class="text-gray-700 hover:text-primary transition-colors">Отчеты</a>
+<a href="#resources" class="text-gray-700 hover:text-primary transition-colors">Ресурсы</a>
+</div>
+</div>
+</nav>
+</header>
+<!-- Главная страница -->
+<section id="home" class="relative overflow-hidden">
+<div class="container mx-auto px-4 py-20 relative z-10">
+<div class="max-w-4xl mx-auto text-center mb-16">
+<h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">Фреймворк для алгоритмической торговли на финансовых рынках</h1>
+<p class="text-xl text-gray-700 mb-8">Инструментарий для работы с историческими данными рынка, проектирования, тестирования и оптимизации торговых стратегий для автоматизированной торговли на российских биржах.</p>
+<a href="#about" class="inline-block bg-primary text-white px-8 py-3 rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Узнать больше</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-database-2-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Анализ исторических данных</h3>
+<p class="text-gray-600">Инструменты для загрузки, обработки и анализа исторических рыночных данных с российских бирж. Возможность визуализации и выявления паттернов.</p>
+</div>
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-line-chart-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Разработка стратегий</h3>
+<p class="text-gray-600">Создание и оптимизация торговых стратегий на основе технического анализа, статистических методов и математических моделей.</p>
+</div>
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-robot-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Автоматизированная торговля</h3>
+<p class="text-gray-600">Реализация автоматического исполнения торговых стратегий с контролем рисков и мониторингом результатов.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- О проекте -->
+<section id="about" class="bg-secondary py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16">О проекте</h2>
+<div class="max-w-4xl mx-auto mb-16">
+<h3 class="text-2xl font-semibold mb-6">Архитектура фреймворка</h3>
+<p class="text-gray-700 mb-4">Наш фреймворк представляет собой модульную систему, состоящую из нескольких взаимосвязанных компонентов, каждый из которых отвечает за определенный аспект алгоритмической торговли.</p>
+<p class="text-gray-700 mb-4">Основные модули включают в себя систему сбора и хранения данных, инструменты для анализа и визуализации, модуль разработки стратегий, бэктестер для проверки эффективности стратегий и модуль исполнения для реальной торговли.</p>
+<p class="text-gray-700">Все компоненты взаимодействуют через единый API, что обеспечивает гибкость и расширяемость системы.</p>
+</div>
+<div>
+<div class="chart-container mx-auto" id="flow-chart"></div>
+</div>
+</div>
+</section>
+<!-- Команда -->
+<section id="team" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16">Наша команда</h2>
+<div class="max-w-3xl mx-auto bg-white p-8 rounded shadow-lg mb-16">
+<p class="text-gray-700 mb-6">Наш проект объединяет 23 студента Московского политехнического университета, разделенных на три специализированные команды, каждая из которых отвечает за ключевые аспекты разработки фреймворка для алгоритмической торговли.</p>
+<div class="flex justify-center mb-8">
+<div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+<span class="text-2xl font-bold text-primary">23</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-line-chart-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Команда разработки стратегий</h3>
+<p class="text-gray-600 mb-4">8 человек, специализирующихся на создании и оптимизации торговых алгоритмов.</p>
+<ul class="list-disc pl-5 text-gray-700 space-y-2">
+<li>Разработка индикаторов технического анализа</li>
+<li>Создание логики торговых стратегий</li>
+<li>Оптимизация параметров алгоритмов</li>
+<li>Анализ эффективности стратегий</li>
+</ul>
+</div>
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-test-tube-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Команда тестирования</h3>
+<p class="text-gray-600 mb-4">8 человек, отвечающих за проверку и валидацию разработанных стратегий.</p>
+<ul class="list-disc pl-5 text-gray-700 space-y-2">
+<li>Создание системы бэктестирования</li>
+<li>Разработка метрик эффективности</li>
+<li>Тестирование на исторических данных</li>
+<li>Визуализация результатов</li>
+</ul>
+</div>
+<div class="bg-white p-8 rounded shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+<i class="ri-database-2-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Команда базы данных</h3>
+<p class="text-gray-600 mb-4">7 человек, занимающихся сбором и управлением данными.</p>
+<ul class="list-disc pl-5 text-gray-700 space-y-2">
+<li>Интеграция с API бирж</li>
+<li>Проектирование структуры БД</li>
+<li>Оптимизация хранения и доступа</li>
+<li>Обработка и очистка данных</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Журнал -->
+<section id="journal" class="bg-secondary py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16">Журнал проекта</h2>
+<div class="max-w-4xl mx-auto space-y-8">
+<div class="bg-white p-8 rounded shadow-lg">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-semibold">Успешно пройдена защита проекта</h3>
+<span class="text-sm text-gray-500">26 мая 2025</span>
+</div>
+<p class="text-gray-700 mb-4">Команда проекта успешно представила и защитила финальную версию фреймворка для алгоритмической торговли. Все поставленные цели были достигнуты, а функциональность системы полностью соответствует требованиям.</p>
+<div class="journal-content hidden">
+<p class="text-gray-700">В ходе защиты были продемонстрированы все ключевые компоненты системы, включая модули сбора и анализа данных, разработки и тестирования торговых стратегий.</p>
+</div>
+<button class="text-primary font-medium hover:underline mt-2 journal-toggle whitespace-nowrap">Читать полностью</button>
+</div>
+<div class="bg-white p-8 rounded shadow-lg">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-semibold">Успешно пройден 2 промежуточный отчет (аттестация)</h3>
+<span class="text-sm text-gray-500">14 мая 2025</span>
+</div>
+<p class="text-gray-700 mb-4">Вторая аттестация проекта успешно пройдена. Представлены результаты разработки системы тестирования торговых стратегий и модуля оптимизации параметров.</p>
+<div class="journal-content hidden">
+<p class="text-gray-700 mb-4">Комиссия отметила высокое качество реализации системы бэктестирования и эффективность алгоритмов оптимизации торговых стратегий.</p>
+<p class="text-gray-700">Получены рекомендации по дальнейшему развитию проекта и подготовке к финальной защите.</p>
+</div>
+<button class="text-primary font-medium hover:underline mt-2 journal-toggle whitespace-nowrap">Читать полностью</button>
+</div>
+<div class="bg-white p-8 rounded shadow-lg">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-semibold">Успешно пройден 1 промежуточный отчет (аттестация)</h3>
+<span class="text-sm text-gray-500">19 марта 2025</span>
+</div>
+<p class="text-gray-700 mb-4">Первая аттестация проекта успешно пройдена. Представлена базовая архитектура системы и результаты разработки модуля сбора и хранения данных.</p>
+<div class="journal-content hidden">
+<p class="text-gray-700 mb-4">Комиссия положительно оценила выбранные технические решения и качество реализации базовых компонентов системы.</p>
+<p class="text-gray-700">Определены направления дальнейшей работы и согласован план развития проекта.</p>
+</div>
+<button class="text-primary font-medium hover:underline mt-2 journal-toggle whitespace-nowrap">Читать полностью</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Отчеты -->
+<section id="reports" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16">Отчеты проекта</h2>
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-8 rounded shadow-lg">
+<div class="flex items-center justify-center">
+<a href="https://github.com/K1RIXmp3/practice_2025_KO" target="_blank" class="flex items-center group">
+<i class="ri-github-fill ri-2x text-primary mr-3"></i>
+<div>
+<h4 class="text-xl font-semibold group-hover:text-primary">Все отчеты доступны на GitHub</h4>
+<p class="text-gray-600 mt-2">Полная документация и отчеты по проекту</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ресурсы -->
+<section id="resources" class="bg-secondary py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16">Полезные ресурсы</h2>
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-8 rounded shadow-lg">
+<h3 class="text-xl font-semibold mb-6">Документация</h3>
+<ul class="space-y-4">
+<li>
+<a href="https://www.investopedia.com/terms/a/algorithmictrading.asp" target="_blank" class="flex items-start group">
+<div class="w-8 h-8 flex items-center justify-center text-primary group-hover:text-primary-dark">
+<i class="ri-file-text-line ri-lg"></i>
+</div>
+<div class="ml-3">
+<h4 class="font-medium group-hover:text-primary">Investopedia – Стратегии алгоритмической торговли</h4>
+<p class="text-sm text-gray-600">Подробное руководство по стратегиям алгоритмической торговли</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://www.kaggle.com/datasets?search=financial" target="_blank" class="flex items-start group">
+<div class="w-8 h-8 flex items-center justify-center text-primary group-hover:text-primary-dark">
+<i class="ri-file-text-line ri-lg"></i>
+</div>
+<div class="ml-3">
+<h4 class="font-medium group-hover:text-primary">Kaggle – Репозиторий с историческими финансовыми данными</h4>
+<p class="text-sm text-gray-600">Коллекция наборов данных для анализа финансовых рынков</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://github.com/wilsonfreitas/awesome-quant" target="_blank" class="flex items-start group">
+<div class="w-8 h-8 flex items-center justify-center text-primary group-hover:text-primary-dark">
+<i class="ri-file-text-line ri-lg"></i>
+</div>
+<div class="ml-3">
+<h4 class="font-medium group-hover:text-primary">GitHub - Коллекция полезных открытых проектов</h4>
+<p class="text-sm text-gray-600">Инструменты для количественного анализа и алгоритмической торговли</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Подвал -->
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div>
+<h3 class="text-lg font-semibold mb-4">О проекте</h3>
+<p class="text-gray-400">Студенческий проект по разработке фреймворка для алгоритмической торговли на финансовых рынках.</p>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Навигация</h3>
+<ul class="space-y-2">
+<li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Главная</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-white transition-colors">О проекте</a></li>
+<li><a href="#team" class="text-gray-400 hover:text-white transition-colors">Команда</a></li>
+<li><a href="#journal" class="text-gray-400 hover:text-white transition-colors">Журнал</a></li>
+<li><a href="#reports" class="text-gray-400 hover:text-white transition-colors">Отчеты</a></li>
+<li><a href="#resources" class="text-gray-400 hover:text-white transition-colors">Ресурсы</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Контакты</h3>
+<p class="text-gray-400 mb-2">Московский политехнический университет</p>
+<p class="text-gray-400 mb-2">Студент Осыкин Кирилл Андреевич</p>
+<p class="text-gray-400 mb-2">Группа: 241-3211</p>
+<p class="text-gray-400">Кафедра информационных технологий</p>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+<p>© 2025 Фреймворк для алгоритмической торговли. Все права защищены.</p>
+</div>
+</div>
+</footer>
+<script id="mobile-menu-script">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+if (mobileMenu.classList.contains('hidden')) {
+mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+} else {
+mobileMenuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+}
+});
+// Закрывать меню при клике на пункт меню
+const mobileMenuItems = mobileMenu.querySelectorAll('a');
+mobileMenuItems.forEach(item => {
+item.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+});
+});
+});
+</script>
+<script id="journal-toggle-script">
+document.addEventListener('DOMContentLoaded', function() {
+const toggleButtons = document.querySelectorAll('.journal-toggle');
+toggleButtons.forEach(button => {
+button.addEventListener('click', function() {
+const content = this.previousElementSibling;
+content.classList.toggle('hidden');
+if (content.classList.contains('hidden')) {
+this.textContent = 'Читать полностью';
+} else {
+this.textContent = 'Свернуть';
+}
+});
+});
+});
+</script>
+<script id="charts-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Основной график на главной странице
+const mainChart = echarts.init(document.getElementById('main-chart'));
+const mainOption = {
+animation: false,
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.8)',
+borderColor: '#f0f0f0',
+textStyle: {
+color: '#1f2937'
+}
+},
+grid: {
+top: 10,
+right: 10,
+bottom: 10,
+left: 10,
+containLabel: true
+},
+xAxis: {
+type: 'category',
+boundaryGap: false,
+data: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+axisLine: {
+lineStyle: {
+color: '#e0e0e0'
+}
+},
+axisLabel: {
+color: '#1f2937'
+}
+},
+yAxis: {
+type: 'value',
+axisLine: {
+show: false
+},
+axisLabel: {
+color: '#1f2937'
+},
+splitLine: {
+lineStyle: {
+color: '#f0f0f0'
+}
+}
+},
+series: [
+{
+name: 'Стратегия 1',
+type: 'line',
+smooth: true,
+symbol: 'none',
+lineStyle: {
+width: 3,
+color: 'rgba(87, 181, 231, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{
+offset: 0,
+color: 'rgba(87, 181, 231, 0.2)'
+},
+{
+offset: 1,
+color: 'rgba(87, 181, 231, 0.01)'
+}
+])
+},
+data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
+},
+{
+name: 'Стратегия 2',
+type: 'line',
+smooth: true,
+symbol: 'none',
+lineStyle: {
+width: 3,
+color: 'rgba(141, 211, 199, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{
+offset: 0,
+color: 'rgba(141, 211, 199, 0.2)'
+},
+{
+offset: 1,
+color: 'rgba(141, 211, 199, 0.01)'
+}
+])
+},
+data: [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149]
+},
+{
+name: 'Индекс',
+type: 'line',
+smooth: true,
+symbol: 'none',
+lineStyle: {
+width: 3,
+color: 'rgba(251, 191, 114, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{
+offset: 0,
+color: 'rgba(251, 191, 114, 0.2)'
+},
+{
+offset: 1,
+color: 'rgba(251, 191, 114, 0.01)'
+}
+])
+},
+data: [150, 232, 201, 154, 190, 330, 410, 182, 191, 234, 290, 330]
+}
+]
+};
+mainChart.setOption(mainOption);
+// График потока данных
+const flowChart = echarts.init(document.getElementById('flow-chart'));
+const flowOption = {
+animation: false,
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.8)',
+borderColor: '#f0f0f0',
+textStyle: {
+color: '#1f2937'
+}
+},
+series: [
+{
+type: 'sankey',
+layout: 'none',
+emphasis: {
+focus: 'adjacency'
+},
+data: [
+{ name: 'Источники данных' },
+{ name: 'Модуль данных' },
+{ name: 'Хранилище' },
+{ name: 'Модуль анализа' },
+{ name: 'Модуль стратегий' },
+{ name: 'Бэктестер' },
+{ name: 'Оптимизатор' },
+{ name: 'Модуль исполнения' },
+{ name: 'Биржа' }
+],
+links: [
+{ source: 'Источники данных', target: 'Модуль данных', value: 5 },
+{ source: 'Модуль данных', target: 'Хранилище', value: 5 },
+{ source: 'Хранилище', target: 'Модуль анализа', value: 3 },
+{ source: 'Хранилище', target: 'Модуль стратегий', value: 4 },
+{ source: 'Модуль анализа', target: 'Модуль стратегий', value: 3 },
+{ source: 'Модуль стратегий', target: 'Бэктестер', value: 4 },
+{ source: 'Бэктестер', target: 'Оптимизатор', value: 2 },
+{ source: 'Оптимизатор', target: 'Модуль стратегий', value: 2 },
+{ source: 'Модуль стратегий', target: 'Модуль исполнения', value: 3 },
+{ source: 'Модуль исполнения', target: 'Биржа', value: 3 }
+],
+lineStyle: {
+color: 'source',
+curveness: 0.5
+},
+itemStyle: {
+color: function(params) {
+const colors = [
+'rgba(87, 181, 231, 1)',
+'rgba(141, 211, 199, 1)',
+'rgba(251, 191, 114, 1)',
+'rgba(252, 141, 98, 1)'
+];
+return colors[params.dataIndex % colors.length];
+},
+borderRadius: 6
+},
+label: {
+color: '#1f2937'
+}
+}
+]
+};
+flowChart.setOption(flowOption);
+// Адаптивность графиков при изменении размера окна
+window.addEventListener('resize', function() {
+mainChart.resize();
+flowChart.resize();
+});
+});
+</script>
+</body>
+</html>
